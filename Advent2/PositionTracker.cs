@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace CodeAdvent.Advent2
 {
+    public delegate void MoveABit(int amount);
+
     public class PositionTracker : IPositionTracker
     {
         public string FilePath { get; set; } = "C:\\CodeAdvent\\2\\2-Moves.txt";
@@ -14,6 +16,26 @@ namespace CodeAdvent.Advent2
         public int Aim { get; set; } = 0;
         public int Depth { get; set; } = 0;
         public List<MoveInstruction> Course { get; set; }
+
+        private Dictionary<string, MoveABit> MoveMaster;
+
+        public PositionTracker()
+        {
+            MoveMaster = new Dictionary<string, MoveABit>();
+            MoveMaster.Add("up", (amount) =>
+            {
+                Aim -= amount;
+            });
+            MoveMaster.Add("down", (amount) =>
+            {
+                Aim += amount;
+            });
+            MoveMaster.Add("forward", (amount) =>
+            {
+                HPosition += amount;
+                Depth += (Aim * amount);
+            });
+        }
 
         public void LoadCourse()
         {
@@ -48,34 +70,11 @@ namespace CodeAdvent.Advent2
         {
             if (move == null) return;
 
-            switch (move.Direction)
+            if (MoveMaster.ContainsKey(move.Direction))
             {
-                case "forward":
-                    GoForward(move.Size);
-                    break;
-                case "up":
-                    GoUp(move.Size);
-                    break;
-                case "down":
-                    GoDown(move.Size);
-                    break;
+                var toDo = MoveMaster[move.Direction];
+                toDo(move.Size);
             }
-        }
-
-        private void GoUp(int amount)
-        {
-            Aim -= amount;
-        }
-
-        private void GoDown(int amount)
-        {
-            Aim += amount;
-        }
-
-        private void GoForward(int amount)
-        {
-            HPosition += amount;
-            Depth += (Aim * amount);
         }
     }
 }
