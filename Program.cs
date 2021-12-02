@@ -29,10 +29,11 @@ namespace CodeAdvent
 
         private static IHost CreateHostBuilder(string[] args)
         {
-            var defaultBuilder = Host.CreateDefaultBuilder(args);
-            defaultBuilder.ConfigureServices((hbContext, services) => services.AddTransient<IDepthTracker, DepthTracker>());
-            defaultBuilder.ConfigureServices((hbContext, services) => services.AddTransient<IPositionTracker, PositionTracker>());
-            return defaultBuilder.Build();
+            var defaultBuilder = Host.CreateDefaultBuilder(args)
+                .ConfigureServices((hbContext, services) => services.AddTransient<IDepthTracker, DepthTracker>())
+                .ConfigureServices((hbContext, services) => services.AddTransient<IPositionTracker, PositionTracker>())
+                .Build();
+            return defaultBuilder;
         }
 
 
