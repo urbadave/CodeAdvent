@@ -9,7 +9,7 @@ namespace CodeAdvent.Advent1
 {
     public class DepthTracker : IDepthTracker
     {
-        public string FilePath { get; set; } = "C:\\CodeAdvent\\1-1\\sonarDepths.txt";
+        public string FilePath { get; set; } = "C:\\CodeAdvent\\1\\1-SonarDepths.txt";
         public List<int> DepthList { get; set; }
         public List<int> MeasureWindow { get; set; }
 
@@ -48,21 +48,9 @@ namespace CodeAdvent.Advent1
             var rangeList = new List<int>();
             foreach(var d in DepthList)
             {
-                if(rangeList.Count == size)
-                {
-                    rangeList.RemoveAt(0);
-                    rangeList.Add(d);
-                    MeasureWindow.Add(rangeList.Aggregate(0, (total, next) => total += next));
-                }
-                else if(rangeList.Count == size-1)
-                {
-                    rangeList.Add(d);
-                    MeasureWindow.Add(rangeList.Aggregate(0, (total, next) => total += next));
-                }
-                else
-                {
-                    rangeList.Add(d);
-                }
+                rangeList.Add(d);
+                if (rangeList.Count > size) rangeList.RemoveAt(0);
+                if (rangeList.Count == size) MeasureWindow.Add(rangeList.Aggregate(0, (total, next) => total += next));
             }
         }
 
