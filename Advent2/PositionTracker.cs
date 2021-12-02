@@ -72,8 +72,8 @@ namespace CodeAdvent.Advent2
 
             if (MoveMaster.ContainsKey(move.Direction))
             {
-                var toDo = MoveMaster[move.Direction];
-                toDo(move.Size);
+                var moveFunc = MoveMaster[move.Direction];
+                moveFunc(move.Size);
             }
         }
     }
