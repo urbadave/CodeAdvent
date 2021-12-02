@@ -23,7 +23,7 @@ namespace CodeAdvent
 
             Console.WriteLine($"Depth increased {depthAnswer} times");
             Console.WriteLine($"Final position number {posAnswer}. Depth:{positionTracker.Depth}, HPos: {positionTracker.HPosition}");
-            Console.WriteLine("Advent Task Done");
+            Console.WriteLine("Advent Task Done Day 2");
             return host.RunAsync();
         }
 
