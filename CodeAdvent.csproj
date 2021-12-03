@@ -12,6 +12,7 @@
   <ItemGroup>
     <Folder Include="Advent1\Data\" />
     <Folder Include="Advent2\Data\" />
+    <Folder Include="Advent3\Data\" />
   </ItemGroup>
 
 </Project>
